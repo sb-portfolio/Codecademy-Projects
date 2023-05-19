@@ -16,4 +16,9 @@ Rooster.timeAtDawn = (hour) => {
   };
 }
 
+// Return a morning rooster call
+Rooster.call = () => {
+  return 'cookoo!';
+}
+
 module.exports = Rooster;

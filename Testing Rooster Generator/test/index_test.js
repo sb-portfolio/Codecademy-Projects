@@ -35,7 +35,15 @@ describe('Rooster', () => {
         Rooster.timeAtDawn(25)
       }, RangeError)
     })
+  })
+  describe('.call', () => {
+    it('return the call of rooster', () => {
+        const expectedResponse = 'cookoo!'
 
+        const response = Rooster.call()
+
+        assert.strictEqual(response, expectedResponse)
+    })
   })
 
 })
