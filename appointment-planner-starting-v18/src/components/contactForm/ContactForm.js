@@ -41,7 +41,6 @@ export const ContactForm = ({
         />                
         <button type="submit">Add New Contact</button>
       </form>
-      <hr />
     </>
   );
 };

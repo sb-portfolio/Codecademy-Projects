@@ -21,6 +21,33 @@ export const AppointmentForm = ({
 }) => {
 
   return (
-    <></>
+      <form onSubmit={handleSubmit}>
+        <label for="title">Enter Title: </label>
+        <input 
+          type="text" 
+          value={title}
+          placeholder="Enter Title"
+          id="title"
+          onChange={(event) => setTitle(event.target.value)}
+        />
+        <label for="date">Enter Date: </label>
+        <input 
+          type="date" 
+          value={date}
+          placeholder="Enter Date"
+          id="date"
+          onChange={(event) => setDate(event.target.value)}
+  
+        />
+        <label for="time">Enter Time: </label>
+        <input 
+          type="time" 
+          value={time}
+          placeholder="Enter Time"
+          id="time"
+          onChange={(event) => setTime(event.target.value)}
+        />                
+        <button type="submit">Add New Contact</button>
+      </form>
   );
 };

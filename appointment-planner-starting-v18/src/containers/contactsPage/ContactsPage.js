@@ -58,11 +58,7 @@ In the Contacts section, render a TileList with the contact array passed via pro
       <hr />
       <section>
         <h2>Contacts</h2>
-        {
-          contacts.map(contact => {
-            return <TileList contact={contact}/>
-          })
-        }
+         <TileList dataList={contacts}/>
       </section>
       </div>
   );
