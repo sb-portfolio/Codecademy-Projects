@@ -4,10 +4,21 @@ import { AppointmentForm } from "../../components/appointmentForm/AppointmentFor
 import { TileList } from "../../components/tileList/TileList";
 
 export const AppointmentsPage = ({contacts,appointments,setAppointments}) => {
-  /*
-  Define state variables for 
-  appointment info
-  */
+  const [title, setTitle] = useState("")
+  const [contact, setContact] = useState("")
+  const [date, setDate] = useState("")
+  const [time, setTime] = useState("")   
+
+  function addNewAppointment(title, contact, date, time){
+
+    const newAppointment = ({
+      title, 
+      contact, 
+      date, 
+      time
+    })
+    setAppointments(prevAppointments => [newAppointment, ...prevAppointments])
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
