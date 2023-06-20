@@ -3,34 +3,67 @@ import React, { useState, useEffect } from "react";
 import { ContactForm } from "../../components/contactForm/ContactForm";
 import { TileList } from "../../components/tileList/TileList";
 
-export const ContactsPage = ({contacts}) => {
+export const ContactsPage = ({contacts, addNewContact}) => {
+
+  const [name, setName] = useState("")
+  const [phone, setPhone] = useState("")
+  const [email, setEmail] = useState("")
+  const [nameAlreadyExists, setNameAlreadyExists] = useState(false)
   /*
-  Define state variables for 
-  contact info and duplicate check
+
+
+
+In the Contacts section, render a TileList with the contact array passed via props
   */
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    /*
-    Add contact info and clear data
-    if the contact name is not a duplicate
-    */
+
+   if(nameAlreadyExists){
+    console.log("Contact already exists")
+    return
+   }
+   
+    addNewContact(name, phone, email)
+    setName("")
+    setPhone("")
+    setEmail("")
   };
 
-  /*
-  Using hooks, check for contact name in the 
-  contacts array variable in props
-  */
+  useEffect(() => {
+
+    const contactAlreadyStored = contacts.some(contact => contact.name===name)
+
+    setNameAlreadyExists(contactAlreadyStored)
+
+  },[name])
+
+
 
   return (
     <div>
       <section>
-        <h2>{contacts[0].name}</h2> 
+        <h2>Add New Contact</h2> 
+        <ContactForm 
+        name={name}
+        setName={setName}
+        phone={phone}
+        setPhone={setPhone}
+        email={email}
+        setEmail={setEmail}
+        handleSubmit={handleSubmit}
+        nameAlreadyExists={nameAlreadyExists}
+      />
       </section>
       <hr />
       <section>
         <h2>Contacts</h2>
+        {
+          contacts.map(contact => {
+            return <TileList contact={contact}/>
+          })
+        }
       </section>
-    </div>
+      </div>
   );
 };

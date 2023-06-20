@@ -1,0 +1,16 @@
+.tile-container{
+    display: flex;
+    gap: 10px;
+    border: 1px solid black;
+    justify-content: space-between;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.tile-container:hover{
+    background-color: lightgrey;
+}
+
+span{
+    font-weight: bold;
+}

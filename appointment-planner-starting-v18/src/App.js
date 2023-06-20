@@ -9,11 +9,11 @@ function App() {
   const [contacts, setContacts] = useState([])
   const [appointments, setAppointments] = useState([])  
 
-  function addNewContact(name, phoneNumber, email){
+  function addNewContact(name, phone, email){
 
     const newContact = {
       name,
-      phoneNumber,
+      phone,
       email
     }
 
@@ -31,6 +31,11 @@ function App() {
 
     setAppointments(prevAppointment => [newAppointment, ...prevAppointment])
   }
+
+  useEffect(() => {
+    console.log(contacts)
+
+  },[contacts])
 
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={ <Root/> }>
