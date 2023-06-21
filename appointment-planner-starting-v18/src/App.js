@@ -13,8 +13,7 @@ function App() {
 
     const newContact = {
       name,
-      phone,
-      email
+      description: [phone,email]
     }
 
     setContacts(prevContacts => [newContact, ...prevContacts])
@@ -24,18 +23,12 @@ function App() {
     
     const newAppointment = {
       name,
-      contact,
-      date,
-      time
+      description: [contact, date, time]
     }
 
     setAppointments(prevAppointment => [newAppointment, ...prevAppointment])
   }
 
-  useEffect(() => {
-    console.log(contacts)
-
-  },[contacts])
 
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={ <Root/> }>
@@ -50,7 +43,7 @@ function App() {
         <AppointmentsPage  
           contacts={contacts}
           appointments={appointments} 
-          setAppointments={setAppointments}
+          addNewAppointment={addNewAppointment}
         />}
       />
     </Route>

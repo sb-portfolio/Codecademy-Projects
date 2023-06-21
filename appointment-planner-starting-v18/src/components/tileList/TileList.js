@@ -4,12 +4,10 @@ import "./TileList.css"
 
 export const TileList = ({dataList}) => {
 
-
-
   return (
-    <div className="tile-container">
-        {dataList.map(data => {
-          return <Tile />
+    <div>
+        {dataList.map((data,index) => {
+          return <Tile key={index} data={data}/>
         })}
     </div>
   );

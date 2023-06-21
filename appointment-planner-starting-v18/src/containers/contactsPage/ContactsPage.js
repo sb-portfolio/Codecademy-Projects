@@ -35,7 +35,6 @@ In the Contacts section, render a TileList with the contact array passed via pro
     const contactAlreadyStored = contacts.some(contact => contact.name===name)
 
     setNameAlreadyExists(contactAlreadyStored)
-
   },[name])
 
 

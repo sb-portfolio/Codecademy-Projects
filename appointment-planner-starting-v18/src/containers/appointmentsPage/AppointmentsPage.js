@@ -3,29 +3,21 @@ import React, { useState } from "react";
 import { AppointmentForm } from "../../components/appointmentForm/AppointmentForm";
 import { TileList } from "../../components/tileList/TileList";
 
-export const AppointmentsPage = ({contacts,appointments,setAppointments}) => {
-  const [title, setTitle] = useState("")
+export const AppointmentsPage = ({contacts,appointments,addNewAppointment}) => {
+  const [name, setName] = useState("")
   const [contact, setContact] = useState("")
   const [date, setDate] = useState("")
   const [time, setTime] = useState("")   
 
-  function addNewAppointment(title, contact, date, time){
-
-    const newAppointment = ({
-      title, 
-      contact, 
-      date, 
-      time
-    })
-    setAppointments(prevAppointments => [newAppointment, ...prevAppointments])
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    /*
-    Add contact info and clear data  
-    */
-   
+
+    addNewAppointment(name, contact, date, time)
+    setName("")
+    setContact("")
+    setDate("")
+    setTime("")
   };
 
   return (
@@ -34,8 +26,8 @@ export const AppointmentsPage = ({contacts,appointments,setAppointments}) => {
         <h2>Add Appointment</h2>
         {<AppointmentForm 
               contacts={contacts}
-              title={title}
-              setTitle={setTitle}
+              title={name}
+              setTitle={setName}
               contact={contact}
               setContact={setContact}
               date={date}
@@ -48,6 +40,7 @@ export const AppointmentsPage = ({contacts,appointments,setAppointments}) => {
       <hr />
       <section>
         <h2>Appointments</h2>
+        {<TileList dataList={appointments}/>}
       </section>
     </div>
   );

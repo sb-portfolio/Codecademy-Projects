@@ -1,4 +1,5 @@
 import React from "react";
+import { ContactPicker } from "../contactPicker/ContactPicker";
 
 const getTodayString = () => {
   const [month, day, year] = new Date()
@@ -6,6 +7,13 @@ const getTodayString = () => {
     .split("/");
   return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
 };
+
+
+// Render a form with:
+
+// A ContactPicker component with the contacts list passed in via props
+
+// Use getTodayString() to set the min attribute of the date input
 
 export const AppointmentForm = ({
   contacts,
@@ -20,6 +28,11 @@ export const AppointmentForm = ({
   handleSubmit
 }) => {
 
+  function handleChange(event){
+    setContact(event.target.value)
+  }
+  
+
   return (
       <form onSubmit={handleSubmit}>
         <label for="title">Enter Title: </label>
@@ -30,6 +43,11 @@ export const AppointmentForm = ({
           id="title"
           onChange={(event) => setTitle(event.target.value)}
         />
+        <ContactPicker 
+          contacts={contacts}
+          handleChange={handleChange}
+          value={contact}
+        />
         <label for="date">Enter Date: </label>
         <input 
           type="date" 
@@ -37,7 +55,7 @@ export const AppointmentForm = ({
           placeholder="Enter Date"
           id="date"
           onChange={(event) => setDate(event.target.value)}
-  
+          min={getTodayString()}
         />
         <label for="time">Enter Time: </label>
         <input 
@@ -47,7 +65,7 @@ export const AppointmentForm = ({
           id="time"
           onChange={(event) => setTime(event.target.value)}
         />                
-        <button type="submit">Add New Contact</button>
+        <button type="submit">Add New Appointment</button>
       </form>
   );
 };
