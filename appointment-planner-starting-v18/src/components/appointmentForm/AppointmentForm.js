@@ -35,7 +35,7 @@ export const AppointmentForm = ({
 
   return (
       <form onSubmit={handleSubmit}>
-        <label for="title">Enter Title: </label>
+        <label htmlFor="title">Enter Title: </label>
         <input 
           type="text" 
           value={title}
@@ -48,7 +48,7 @@ export const AppointmentForm = ({
           handleChange={handleChange}
           value={contact}
         />
-        <label for="date">Enter Date: </label>
+        <label htmlFor="date">Enter Date: </label>
         <input 
           type="date" 
           value={date}
@@ -57,7 +57,7 @@ export const AppointmentForm = ({
           onChange={(event) => setDate(event.target.value)}
           min={getTodayString()}
         />
-        <label for="time">Enter Time: </label>
+        <label htmlFor ="time">Enter Time: </label>
         <input 
           type="time" 
           value={time}
