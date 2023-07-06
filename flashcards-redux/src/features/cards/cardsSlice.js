@@ -7,8 +7,7 @@ export const cardsSlice = createSlice({
   },
   reducers: {
     addCard: (state, action) => {
-      console.log("adding card")
-      console.log(action.payload)
+
       state.cards[action.payload.id] = {
           id: action.payload.id,
           front: action.payload.front, 

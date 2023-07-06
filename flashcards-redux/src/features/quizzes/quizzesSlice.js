@@ -3,9 +3,6 @@ import { addQuizId } from '../topics/topicsSlice'
 
 export const addNewQuiz = (payload) => {
 
-
-
-
   return (dispatch) => {
     dispatch(addQuizId({
       quizId: payload.id, 

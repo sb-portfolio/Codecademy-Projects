@@ -4,9 +4,8 @@ import { useSelector } from "react-redux";
 import { selectQuizzes } from './quizzesSlice'
 
 export default function Quizzes() {
-  const quizzes = useSelector(selectQuizzes); // replace this with a call to your selector to get all the quizzes in state
+  const quizzes = useSelector(selectQuizzes); 
 
-  console.log(quizzes)
   return (
     <section className="center">
       <h1>Quizzes</h1>

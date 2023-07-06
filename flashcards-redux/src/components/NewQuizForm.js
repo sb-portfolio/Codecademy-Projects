@@ -24,14 +24,10 @@ export default function NewQuizForm() {
 
     const cardIds = [];
 
-
     cards.forEach(card => {
 
       const cardId = uuidv4()
-
       cardIds.push(cardId)
-
-      console.log("add cards 1")
 
       dispatch(addCard({
          id: cardId, 
@@ -39,9 +35,7 @@ export default function NewQuizForm() {
          back: card.back
       }))
 
-    })
-
-    
+    })   
 
     const quizID = uuidv4()
 
@@ -52,8 +46,6 @@ export default function NewQuizForm() {
       cardIds: cardIds
     }
 
-    // create the new cards here and add each card's id to cardIds
-    // create the new quiz here
     dispatch(addNewQuiz(quizDetails))
 
     history.push(ROUTES.quizzesRoute());
