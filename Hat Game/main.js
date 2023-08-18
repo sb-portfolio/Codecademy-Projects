@@ -22,7 +22,7 @@ class Field {
       this.playerLocation[0]++
     } else{
       console.log("Out of bounds")
-      return true
+      return trueu
     }
     return this.checkLocation()
   }
@@ -119,14 +119,61 @@ class Field {
       tempField[rows-1][cols-1] = hat
     }
 
-    this.field = tempField
+    return tempField
+  }
+  newField(rows, cols, percentHoles){
+    const newField = this.generateField(rows, cols, percentHoles)
+
+    this.checkField(newField)
+
+    this.field = newField
+  }
+  checkField(field){
+    let currentRow = 0
+    let currentCol = 0
+    let row = 0
+    let col = 0
+    const numberCols = field[0].length
+    const numberRows = field.length
+    console.log(numberCols)
+    console.log(numberRows)
+
+    let stillChecking = 0
+
+    while(stillChecking<10){
+
+      for(let checkDirections = 0; checkDirections<4; checkDirections++){
+        if(checkDirections==0&&currentRow>0){
+          row = currentRow - 1
+        } else if(checkDirections==1&&currentCol>0){
+          col = currentCol - 1
+        } else if(checkDirections==2&&currentRow<numberRows-1){
+          row = currentRow + 1
+        } else if(checkDirections==3&&currentCol<numberCols-1){
+          col = currentCol + 1
+        } 
+
+        if(field[row][col]===hat){
+          console.log("solvable")
+        } else if(field[row][col]!==hole){
+          console.log("clear - row: " + row + " col: " + col)
+          currentRow = row
+          currentCol = col
+          checkDirections = 5
+        }
+      }
+      stillChecking++
+
+
+
+    }
   }
 }
 
 
 const myField = new Field();
 
-myField.generateField(20,20,40)
+myField.newField(20,20,40)
 
 let loop = true;
 let option = ''
