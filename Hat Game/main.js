@@ -6,8 +6,8 @@ const fieldCharacter = '░';
 const pathCharacter = '*';
 
 class Field {
-  constructor(field){
-     this.field = field;
+  constructor(){
+     this.field = [];
      this.playerLocation = [0, 0]
   }
   print(){
@@ -124,17 +124,13 @@ class Field {
 }
 
 
-const myField = new Field([
-  ['*', '░', '░'],
-  ['░', 'O', '░'],
-  ['░', '^', '░'],
-]);
+const myField = new Field();
 
 myField.generateField(20,20,40)
 
 let loop = true;
 let option = ''
-myField.print()
+  myField.print()
 
 while(loop){
 
