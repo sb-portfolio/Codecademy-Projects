@@ -14,7 +14,6 @@ class Field {
     this.field.forEach(line => console.log(line.join('')))
   }
   down(){
-     console.log("move down")
     const row = this.playerLocation[0]
     const column = this.playerLocation[1]
     this.field[row][column] = '░'
@@ -90,6 +89,7 @@ class Field {
     }
   }
   generateField(rows, cols, percentHoles){
+
     const numberOfHoles = rows * cols * percentHoles / 100
     let hatAdded = false
 
@@ -130,7 +130,7 @@ const myField = new Field([
   ['░', '^', '░'],
 ]);
 
-myField.generateField(10,10,20)
+myField.generateField(20,20,40)
 
 let loop = true;
 let option = ''
