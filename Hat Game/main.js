@@ -134,7 +134,7 @@ myField.generateField(20,20,40)
 
 let loop = true;
 let option = ''
-  myField.print()
+myField.print()
 
 while(loop){
 
