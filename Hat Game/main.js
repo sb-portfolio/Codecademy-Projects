@@ -129,6 +129,9 @@ class Field {
     this.field = newField
   }
   checkField(field){
+
+    let direction = 'd' //?????
+
     let currentRow = 0
     let currentCol = 0
     let row = 0
