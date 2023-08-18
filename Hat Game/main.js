@@ -16,7 +16,7 @@ class Field {
   down(){
     const row = this.playerLocation[0]
     const column = this.playerLocation[1]
-    this.field[row][column] = '░'
+    this.field[row][column] = fieldCharacter
 
     if(this.playerLocation[0]< this.field.length-1){
       this.playerLocation[0]++
@@ -29,7 +29,7 @@ class Field {
   right(){
     const row = this.playerLocation[0]
     const column = this.playerLocation[1]
-    this.field[row][column] = '░'
+    this.field[row][column] = fieldCharacter
 
     
     if(this.playerLocation[1]< this.field[row].length-1){
@@ -44,7 +44,7 @@ class Field {
   left(){
     const row = this.playerLocation[0]
     const column = this.playerLocation[1]
-    this.field[row][column] = '░'
+    this.field[row][column] = fieldCharacter
 
     
     if(this.playerLocation[1]>0){
@@ -59,7 +59,7 @@ class Field {
   up(){
     const row = this.playerLocation[0]
     const column = this.playerLocation[1]
-    this.field[row][column] = '░'
+    this.field[row][column] = fieldCharacter
 
     
     if(this.playerLocation[0]>0){
@@ -75,15 +75,15 @@ class Field {
     const row = this.playerLocation[0]
     const column = this.playerLocation[1]
 
-    if(this.field[row][column]==="░"){
-      this.field[row][column] = '*'
+    if(this.field[row][column]===fieldCharacter){
+      this.field[row][column] = pathCharacter
       return false
     }
     else if(this.field[row][column]==="O"){
       console.log("You fell down a hole")
       return true
     }
-    else if(this.field[row][column]==="^"){
+    else if(this.field[row][column]===hat){
       console.log("Congrats, you found your hat!")
       return true
     }
@@ -101,22 +101,22 @@ class Field {
       for (let c=0; c<cols; c++){
         const randomNumber = Math.floor(Math.random()*rows*cols)
         if(randomNumber===0&&!hatAdded&&(r!=0||c!=0)){
-          currentRow.push('^')
+          currentRow.push(hat)
           hatAdded = true
         }
         else if(randomNumber>=1&&randomNumber< numberOfHoles){
-          currentRow.push('O')
+          currentRow.push(hole)
         } 
          else{
-          currentRow.push('░')
+          currentRow.push(fieldCharacter)
         }
         
       }
       tempField.push(currentRow)
     }
-    tempField[0][0] = '*'
+    tempField[0][0] = pathCharacter
     if(!hatAdded){
-      tempField[rows-1][cols-1] = '^'
+      tempField[rows-1][cols-1] = hat
     }
 
     this.field = tempField
