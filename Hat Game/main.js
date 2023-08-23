@@ -131,6 +131,18 @@ class Field {
   checkField(field){
 
     let direction = 'd' //?????
+    /*
+    point down
+    if clear on left go left and change direction to left
+    if not clear left go down 
+      if down clear go down
+      if down not clear point right
+        if right clear go right
+        if right not clear point up
+          if up 
+
+
+    */
 
     let currentRow = 0
     let currentCol = 0
