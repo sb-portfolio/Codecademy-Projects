@@ -12,6 +12,9 @@ const resetQuotes = () => {
 
 document.addEventListener("click", (event) => {
   const id = event.target.dataset.id
+  const editButtonId = event.target.dataset.editid
+  const cancelButtonId = event.target.dataset.cancelid
+  const saveButtonId = event.target.dataset.saveid
 
   if(id){
 
@@ -22,6 +25,16 @@ document.addEventListener("click", (event) => {
     .then(response => {
       renderQuotes(response.quotes);
     });
+  } else if(editButtonId){
+    console.log("edit")
+    document.getElementById(`quote${editButtonId}`).setAttribute("contenteditable", true);
+  } else if(cancelButtonId){
+    console.log("cencel")
+    document.getElementById(`quote${cancelButtonId}`).setAttribute("contenteditable", false);
+  } else if(saveButtonId){
+
+    document.getElementById(`quote${saveButtonId}`).setAttribute("contenteditable", false);
+    console.log("fire api")
   }
   
 })
@@ -38,10 +51,17 @@ const renderQuotes = (quotes = []) => {
     quotes.forEach(quote => {
       const newQuote = document.createElement('div');
       newQuote.className = 'single-quote';
-      newQuote.innerHTML = `<div class="quote-text">${quote.quote}</div>
-      <div class="attribution">- ${quote.person}</div>
+      newQuote.innerHTML = `
+      <div class="quote-text" id="quote${quote.id}">${quote.quote}</div>
+      <div class="attribution" contentEditable="true">- ${quote.person}</div>
         <button data-editid="${quote.id}">
             Edit
+        </button>
+        <button data-cancelid="${quote.id}">
+            Cancel
+        </button>
+        <button data-saveid="${quote.id}">
+            Save
         </button>
         <button data-id="${quote.id}">
           Delete
