@@ -10,6 +10,22 @@ const resetQuotes = () => {
   quoteContainer.innerHTML = '';
 }
 
+document.addEventListener("click", (event) => {
+  const id = event.target.dataset.id
+
+  if(id){
+
+    fetch(`/api/quotes/${id}`, {
+      method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(response => {
+      renderQuotes(response.quotes);
+    });
+  }
+  
+})
+
 const renderError = response => {
   quoteContainer.innerHTML = `<p>Your request returned an error from the server: </p>
 <p>Code: ${response.status}</p>
@@ -23,7 +39,13 @@ const renderQuotes = (quotes = []) => {
       const newQuote = document.createElement('div');
       newQuote.className = 'single-quote';
       newQuote.innerHTML = `<div class="quote-text">${quote.quote}</div>
-      <div class="attribution">- ${quote.person}</div>`;
+      <div class="attribution">- ${quote.person}</div>
+        <button data-editid="${quote.id}">
+            Edit
+        </button>
+        <button data-id="${quote.id}">
+          Delete
+        </button>`;
       quoteContainer.appendChild(newQuote);
     });
   } else {

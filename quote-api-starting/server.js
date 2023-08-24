@@ -60,6 +60,21 @@ quotesRouter.post('/', (req, res, next) => {
     
 })
 
+quotesRouter.delete('/:id', (req, res, next) => {
+    const quoteId = req.params.id
+    const quoteIndex = quotes.findIndex(quote => quote.id===quoteId)
+
+    if(quoteIndex!==-1){
+        //quotes = quotes.filter(quote => quote.id!==quoteId)
+        quotes.splice(quoteIndex,1)
+        res.status(201).send({
+            quotes: quotes
+        })
+    } else{
+        res.status(400).send()
+    }   
+})
+
 app.use('/api/quotes', quotesRouter)
 
 
