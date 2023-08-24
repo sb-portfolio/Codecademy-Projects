@@ -22,7 +22,6 @@ quotesRouter.get('/random', (req, res, next) => {
 quotesRouter.get('/', (req, res, next) => {
     const quoteAuthor = req.query.person
 
-
     if(!quoteAuthor){
         const quotesObject = {
             quotes: quotes
@@ -46,6 +45,19 @@ quotesRouter.get('/', (req, res, next) => {
     }
 
   
+})
+
+quotesRouter.post('/', (req, res, next) => {
+    const newQuote = req.query
+
+    if(newQuote.quote&&newQuote.person){
+        quotes.push(newQuote)
+        res.status(201).send({quote: newQuote})
+    } else{
+        res.status(400).send()
+    }
+
+    
 })
 
 app.use('/api/quotes', quotesRouter)
