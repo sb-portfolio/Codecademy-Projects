@@ -40,7 +40,7 @@ quotesRouter.get('/', (req, res, next) => {
 
             res.send(quoteByAuthorObject)
         } else{
-            res.status(404).send()
+            res.status(404).send([])
         }
         
     }
