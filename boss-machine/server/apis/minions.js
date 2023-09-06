@@ -5,7 +5,8 @@ const { getAllFromDatabase,
         getFromDatabaseById, 
         addToDatabase, 
         updateInstanceInDatabase, 
-        deleteFromDatabasebyId 
+        deleteFromDatabasebyId,
+        createWork
     } = require('../db')
 
 minionsRouter.get('/', (req, res, next) => {
@@ -48,7 +49,6 @@ minionsRouter.put('/:minionId', (req, res, next) => {
 minionsRouter.delete('/:minionId', (req, res, next) => {
 
     const minionId = req.minionId
-    console.log(minionId)
     deleteFromDatabasebyId('minions', minionId)
 
     res.status(204).send()
@@ -66,6 +66,29 @@ minionsRouter.post('/', (req, res, next) => {
        res.status(404).send()
    }
 
+})
+
+minionsRouter.get('/:minionId/work', (req, res, next) => {
+
+    const minionId = req.minionId
+    const minionWork = getFromDatabaseById('work', minionId)
+    console.log(minionWork)
+
+    res.status(200).send(minionWork)
+    
+})
+
+minionsRouter.post('/:minionId/work', (req, res, next) => {
+
+    const minionId = req.minionId
+    const newMinionWork = createWork(minionId)
+
+    if(newMinionWork){
+        addToDatabase('work', newMinionWork)
+        res.status(201).send([])
+   } else{
+       res.status(404).send()
+   }
 
 })
 
