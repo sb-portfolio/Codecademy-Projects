@@ -1,7 +1,7 @@
 const express = require('express');
 const meetingsRouter = express.Router();
 
-const { getAllFromDatabase, addToDatabase } = require('../db')
+const { getAllFromDatabase, addToDatabase, deleteAllFromDatabase, createMeeting } = require('../db')
 
 meetingsRouter.get('/', (req, res, next) => {
 
@@ -10,19 +10,25 @@ meetingsRouter.get('/', (req, res, next) => {
     res.status(200).send(allMeetingsArray)
 })
 
+meetingsRouter.delete('/', (req, res, next) => {
+
+    deleteAllFromDatabase('meetings')
+
+    res.status(204).send()
+    
+})
+
 meetingsRouter.post('/', (req, res, next) => {
 
-    const newMinion = req.body
+    const newMeeting = createMeeting()
+   
+    if(newMeeting){
+        addToDatabase('meetings', newMeeting)
+        res.status(201).send(newMeeting)
+   } else{
+       res.status(404).send()
+   }
 
-    // if(newMinion.name.length > 0 && 
-    //     newMinion.title.length > 0 && 
-    //     typeof newMinion.salary === 'string' && 
-    //     newMinion.weaknesses.length > 0){
-    //         addToDatabase('minions', req.body)
-    //         res.status(200).send(req.body)
-    // } else{
-    //     res.status(404).send()
-    // }  
 })
 
 

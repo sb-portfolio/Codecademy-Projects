@@ -1,7 +1,12 @@
 const express = require('express');
 const minionsRouter = express.Router();
 
-const { getAllFromDatabase, getFromDatabaseById, addToDatabase, updateInstanceInDatabase, deleteFromDatabasebyId } = require('../db')
+const { getAllFromDatabase, 
+        getFromDatabaseById, 
+        addToDatabase, 
+        updateInstanceInDatabase, 
+        deleteFromDatabasebyId 
+    } = require('../db')
 
 minionsRouter.get('/', (req, res, next) => {
 
@@ -43,9 +48,10 @@ minionsRouter.put('/:minionId', (req, res, next) => {
 minionsRouter.delete('/:minionId', (req, res, next) => {
 
     const minionId = req.minionId
+    console.log(minionId)
     deleteFromDatabasebyId('minions', minionId)
 
-    res.status(200).send()
+    res.status(204).send()
     
 })
 
@@ -53,15 +59,14 @@ minionsRouter.post('/', (req, res, next) => {
 
     const newMinion = req.body
 
-    if(newMinion.name.length > 0 && 
-        newMinion.title.length > 0 && 
-        typeof newMinion.salary === 'string' && 
-        newMinion.weaknesses.length > 0){
-            addToDatabase('minions', req.body)
-            res.status(200).send(req.body)
-    } else{
-        res.status(404).send()
-    }  
+    if(newMinion){
+        addToDatabase('minions', newMinion)
+        res.status(201).send(newMinion)
+   } else{
+       res.status(404).send()
+   }
+
+
 })
 
 
