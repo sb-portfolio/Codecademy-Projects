@@ -51,17 +51,20 @@ ideasRouter.delete('/:ideaId', (req, res, next) => {
 
     const ideaId = req.ideaId
 
-    deleteFromDatabasebyId('ideas', ideaId)
+    const deleted = deleteFromDatabasebyId('ideas', ideaId)
 
-    res.status(204).send()
+    if(deleted){
+        res.status(204).send()
+    } else{
+        res.status(500).send()
+    }
+    
     
 })
 
 
 
 ideasRouter.post('/', checkMillionDollarIdea, (req, res, next) => {
-
-    
 
     const newIdea = req.body
 

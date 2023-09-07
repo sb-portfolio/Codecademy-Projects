@@ -60,10 +60,13 @@ minionsRouter.put('/:minionId', (req, res, next) => {
 minionsRouter.delete('/:minionId', (req, res, next) => {
 
     const minionId = req.minionId
-    deleteFromDatabasebyId('minions', minionId)
+    const deleted = deleteFromDatabasebyId('minions', minionId)
 
-    res.status(204).send()
-    
+    if(deleted){
+        res.status(204).send()
+    } else{
+        res.status(500).send()
+    }
 })
 
 minionsRouter.post('/', (req, res, next) => {
@@ -105,8 +108,12 @@ minionsRouter.delete('/:minionId/work/:workId', (req, res, next) => {
 
     const workId = req.workId
 
-   deleteFromDatabasebyId('work', workId)
-   res.status(204).send()
+    const deleted = deleteFromDatabasebyId('work', workId)
+    if (deleted) {
+        res.status(204).send()
+    } else {
+        res.status(500).send()
+    }
 
 })
 
@@ -115,9 +122,8 @@ minionsRouter.put('/:minionId/work/:workId', (req, res, next) => {
     const workId = req.workId
     const minionId = req.minionId
     const workData = req.body
-    const workWithWorkId = getFromDatabaseById('work', workId)
 
-    if(workWithWorkId.minionId===minionId){
+    if(workData.minionId===minionId){
         updateInstanceInDatabase('work', workData)
         res.status(201).send(workData)
     } else{

@@ -12,9 +12,13 @@ meetingsRouter.get('/', (req, res, next) => {
 
 meetingsRouter.delete('/', (req, res, next) => {
 
-    deleteAllFromDatabase('meetings')
+    const deleted = deleteAllFromDatabase('meetings')
 
-    res.status(204).send()
+    if(deleted){
+        res.status(204).send()
+    } else{
+        res.status(500).send()
+    }
     
 })
 
