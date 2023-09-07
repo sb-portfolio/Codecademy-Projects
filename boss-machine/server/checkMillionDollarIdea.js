@@ -8,7 +8,6 @@ const checkMillionDollarIdea = (req, res, next) => {
         return
     }
     if(typeof numWeeks === 'string' || typeof weeklyRevenue === 'string'){
-        console.log("type error")
         res.status(400).send()
         return
     }

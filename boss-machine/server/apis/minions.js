@@ -6,7 +6,7 @@ const { getAllFromDatabase,
         addToDatabase, 
         updateInstanceInDatabase, 
         deleteFromDatabasebyId,
-        createWork
+        getWorkByMinion
     } = require('../db')
 
 minionsRouter.get('/', (req, res, next) => {
@@ -25,9 +25,20 @@ minionsRouter.param('minionId', (req, res, next, id) => {
         next()
     } else{
         res.status(404).send()
-    }
-    
+    } 
 })
+
+minionsRouter.param('workId', (req, res, next, id) => {
+    const workExists = getFromDatabaseById('work', id)
+
+    if(workExists){
+        req.workId = id
+        next()
+    } else{
+        res.status(404).send()
+    } 
+})
+
 
 minionsRouter.get('/:minionId', (req, res, next) => {
 
@@ -71,8 +82,7 @@ minionsRouter.post('/', (req, res, next) => {
 minionsRouter.get('/:minionId/work', (req, res, next) => {
 
     const minionId = req.minionId
-    const minionWork = getFromDatabaseById('work', minionId)
-    console.log(minionWork)
+    const minionWork = getWorkByMinion(minionId)
 
     res.status(200).send(minionWork)
     
@@ -80,16 +90,39 @@ minionsRouter.get('/:minionId/work', (req, res, next) => {
 
 minionsRouter.post('/:minionId/work', (req, res, next) => {
 
-    const minionId = req.minionId
-    const newMinionWork = createWork(minionId)
+    const newMinionWork = req.body
 
     if(newMinionWork){
         addToDatabase('work', newMinionWork)
-        res.status(201).send([])
+        res.status(201).send(newMinionWork)
    } else{
        res.status(404).send()
    }
 
+})
+
+minionsRouter.delete('/:minionId/work/:workId', (req, res, next) => {
+
+    const workId = req.workId
+
+   deleteFromDatabasebyId('work', workId)
+   res.status(204).send()
+
+})
+
+minionsRouter.put('/:minionId/work/:workId', (req, res, next) => {
+
+    const workId = req.workId
+    const minionId = req.minionId
+    const workData = req.body
+    const workWithWorkId = getFromDatabaseById('work', workId)
+
+    if(workWithWorkId.minionId===minionId){
+        updateInstanceInDatabase('work', workData)
+        res.status(201).send(workData)
+    } else{
+        res.status(400).send()
+    }
 })
 
 

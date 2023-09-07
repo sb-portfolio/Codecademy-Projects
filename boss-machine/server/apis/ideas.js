@@ -64,7 +64,6 @@ ideasRouter.post('/', checkMillionDollarIdea, (req, res, next) => {
     
 
     const newIdea = req.body
-   // console.log(newIdea)
 
     if(newIdea){
         addToDatabase('ideas', newIdea)
