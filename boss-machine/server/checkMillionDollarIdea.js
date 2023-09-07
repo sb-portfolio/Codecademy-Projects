@@ -2,21 +2,15 @@ const checkMillionDollarIdea = (req, res, next) => {
 
     const numWeeks = req.body.numWeeks
     const weeklyRevenue = req.body.weeklyRevenue
-
-    if(!numWeeks||!weeklyRevenue){
-        res.status(400).send()
-        return
-    }
-    if(typeof numWeeks === 'string' || typeof weeklyRevenue === 'string'){
-        res.status(400).send()
-        return
-    }
-
     const yield = numWeeks * weeklyRevenue
 
-    if(yield<1000000){
+    const allDataPresent = !numWeeks||!weeklyRevenue
+    const invalidWeeksAndRevenueType =  typeof numWeeks === 'string' || 
+                                        typeof weeklyRevenue === 'string'
+    const yieldToLow = yield < 1000000
+
+    if(allDataPresent||invalidWeeksAndRevenueType||yieldToLow){
         res.status(400).send()
-        return
     } else{
         next()
     }
